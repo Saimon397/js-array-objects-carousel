@@ -1,1 +1,105 @@
 /***STYLE***/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Mali', cursive;
+}
+
+.wrapper {
+    width: 1200px;
+    height: 600px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.img {
+    width: 1200px;
+    height: 600px;
+    border-radius: 1%;
+    object-fit: cover;
+    display: none;
+}
+
+.img.show {
+    display: block;
+}
+
+.img.hidden {
+    display: none;
+}
+
+.next i {
+    position: absolute;
+    color: rgb(110, 214, 99);
+    font-size: 40px;
+    right: 5%;
+    top: 50%;
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+
+.prev i {
+    position: absolute;
+    color: rgb(110, 214, 99);
+    font-size: 40px;
+    left: 5%;
+    top: 50%;
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+
+.title {
+    color: white;
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.title.show {
+    display: block;
+}
+
+.title.hidden {
+    display: none;
+}
+
+.description {
+    color: white;
+    display: none;
+    position: absolute;
+    font-size: 15px;
+    top: 70px;
+    right: 10px;
+}
+
+.description.show {
+    display: block;
+}
+
+.description.hidden {
+    display: none;
+}
+
+.thumbnails {
+    background-color: black;
+    width: 1200px;
+    height: 150px;
+}
+
+.thumbnails-img {
+    width: calc(100% / 5);
+    height: 100%;
+    opacity: .5;
+    cursor: pointer;
+}
+
+.img-frame {
+    outline: 5px solid rgb(110, 214, 99);
+    outline-offset: -5px;
+    opacity: 1;
+}

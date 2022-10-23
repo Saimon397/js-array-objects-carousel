@@ -1,7 +1,7 @@
 /*Dato un array di oggetti letterali con:
-url dell’immagine
-titolo
-descrizione
+-url dell’immagine
+-titolo
+-descrizione
 Creare un carosello come nella foto allegata.
 Milestone 0:
 Come sempre focalizziamoci prima sulla creazione del markup statico: costruiamo il container e inseriamo l'immagine grande in modo da poter stilare lo slider.
@@ -46,3 +46,117 @@ const images = [
         description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam.'
     },
 ];
+
+const Wrapper = document.querySelector('.wrapper');
+const next = document.querySelector('.next');
+const prev = document.querySelector('.prev');
+
+for (let i = 0; i < images.length; i++) {
+    Wrapper.innerHTML +=
+        `<div class="images">
+        <img src="${images[i].url}" class="img">
+        <h2 class='title'>${images[i].title} &#128205;</h2>
+        <h3 class='description'>${images[i].description}</h3>
+        </div>`;
+}
+
+const image = document.querySelectorAll('.img');
+const title = document.querySelectorAll('.title');
+const description = document.querySelectorAll('.description');
+
+let frame = 0;
+addShow();
+
+const thumbnails = document.querySelector('.thumbnails');
+
+for (let c = 0; c < images.length; c++) {
+    let thumb = document.createElement('img');
+    thumb.src = images[c].url;
+    thumb.classList.add('thumbnails-img');
+    thumb.addEventListener('click',
+        function () {
+            removeShow();
+            frame = c;
+            addShow();
+            thumbnailsIMG[index].classList.remove('img-frame');
+            index = c;
+            thumbnailsIMG[index].classList.add('img-frame');
+        }
+    );
+    thumbnails.append(thumb);
+}
+
+const thumbnailsIMG = document.querySelectorAll('.thumbnails-img');
+let index = 0;
+thumbnailsIMG[index].classList.add('img-frame');
+
+next.addEventListener('click', NextImg);
+
+prev.addEventListener('click', PrevImg);
+
+const BtnStartCarousel = document.getElementById('btn-start');
+const BtnStopCarousel = document.getElementById('btn-stop');
+const BtnReverseCarousel = document.getElementById('btn-reverse');
+let interval;
+
+BtnStartCarousel.addEventListener('click',
+    function () {
+        clearInterval(interval);
+        interval = setInterval(NextImg, 3000);
+    }
+);
+
+BtnStopCarousel.addEventListener('click',
+    function () {
+        clearInterval(interval);
+    }
+);
+
+BtnReverseCarousel.addEventListener('click',
+    function () {
+        clearInterval(interval);
+        interval = setInterval(PrevImg, 3000);
+    }
+);
+
+function addShow() {
+    image[frame].classList.add('show');
+    title[frame].classList.add('show');
+    description[frame].classList.add('show');
+}
+
+function removeShow() {
+    image[frame].classList.remove('show');
+    title[frame].classList.remove('show');
+    description[frame].classList.remove('show');
+}
+
+function NextImg() {
+    removeShow();
+    thumbnailsIMG[index].classList.remove('img-frame');
+    frame++;
+    index++;
+    if (frame == images.length) {
+        frame = 0;
+    }
+    if (index == images.length) {
+        index = 0;
+    }
+    addShow();
+    thumbnailsIMG[index].classList.add('img-frame');
+}
+
+function PrevImg() {
+    removeShow();
+    thumbnailsIMG[index].classList.remove('img-frame');
+    frame--;
+    index--;
+    if (frame == images.length - 6) {
+        frame = 4;
+    }
+    if (index == images.length - 6) {
+        index = 4;
+    }
+    addShow();
+    thumbnailsIMG[index].classList.add('img-frame');
+}
